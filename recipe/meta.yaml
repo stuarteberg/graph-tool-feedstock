@@ -1,0 +1,54 @@
+{% set version = "2.26" %}
+
+package:
+  name: graph-tool
+  version: {{ version }}
+
+source:
+  fn: graph-tool-{{ version }}.tar.bz2
+  url: https://downloads.skewed.de/graph-tool/graph-tool-{{ version }}.tar.bz2
+  sha1: b716519cc0944f5d8e36948f67df5b33468153d2
+
+build:
+  skip: true  # [win]
+  number: 0
+  detect_binary_files_with_prefix: true
+
+requirements:
+  build:
+    - toolchain
+    - pkg-config
+    - boost 1.66.0
+    - python
+    - expat
+    - scipy 1.0.*
+    - numpy 1.9.*
+    - cgal 4.11*
+    - sparsehash 2.0.*
+    - cairomm
+    - pycairo
+    
+  run:
+    - boost 1.66.0
+    - python
+    - expat
+    - scipy >=1.0
+    - numpy >=1.9
+    - cgal >=4.11
+    - sparsehash >=2.0
+    - cairomm
+    - pycairo
+
+test:
+  imports:
+    - graph_tool
+
+about:
+  home: https://graph-tool.skewed.de/
+  license: GPLv3
+  license_file: LICENSE
+  summary: Efficient network analysis
+
+extra:
+  recipe-maintainers:
+    - stuarteberg

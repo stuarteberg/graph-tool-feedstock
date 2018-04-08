@@ -32,7 +32,7 @@ fi
     --with-expat="${PREFIX}" \
 ##
 
-make -j${CPU_COUNT}
+make # We don't run parallel make because the RAM requirements are so high for this package.
 #make test
 #eval ${LIBRARY_SEARCH_VAR}=$PREFIX/lib make test
 make install

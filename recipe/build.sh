@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export CPPFLAGS="${CPPFLAGS} -I${PREFIX}/include"
-export CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
+export CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include -std=c++14"
 export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
 export BOOST_ROOT="${PREFIX}"
 

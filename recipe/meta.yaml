@@ -11,14 +11,14 @@ source:
 
 build:
   skip: true  # [win]
-  number: 0
+  number: 1
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
     - toolchain
     - pkg-config
-    - boost 1.66.0
+    - boost 1.64.0
     - python
     - expat
     - scipy 1.0.*
@@ -29,7 +29,7 @@ requirements:
     - pycairo
     
   run:
-    - boost 1.66.0
+    - boost 1.64.0
     - python
     - expat
     - scipy >=1.0
@@ -42,6 +42,7 @@ requirements:
 test:
   imports:
     - graph_tool
+    - graph_tool.all
 
 about:
   home: https://graph-tool.skewed.de/

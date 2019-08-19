@@ -20,12 +20,8 @@ fi
 ##
 
 # Due to the high RAM requirements to build this package,
-# We limit build parallelism to no more than 2.
-if [ "${CPU_COUNT}" -gt 2 ]; then
-	CPU_COUNT=2
-fi
-
-make -j${CPU_COUNT} 
+# we don't build in parallel.
+make 
 
 #LD_LIBRARY_PATH=${PREFIX}/lib make test
 

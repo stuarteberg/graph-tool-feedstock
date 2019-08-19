@@ -9,6 +9,8 @@ source:
   fn: graph-tool-{{ version }}.tar.bz2
   url: https://downloads.skewed.de/graph-tool/graph-tool-{{ version }}.tar.bz2
   sha1: {{ sha1 }}
+  patches:
+    - patches/no-obsoloete-compiler-version-flag.patch
 
 build:
   skip: true  # [win]
@@ -18,7 +20,9 @@ build:
 requirements:
   build:
     - pkg-config
-    - {{ compiler("cxx") }}
+    #- {{ compiler("cxx") }}
+    - clangxx_osx-64=8.*  # [osx]
+    - gxx_linux-64=8.*    # [linux]
     
   host:
     - python

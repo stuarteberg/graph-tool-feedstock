@@ -21,8 +21,8 @@ requirements:
     - pkg-config
 
     #- {{ compiler("cxx") }}
-    - clangxx_osx-64=8.*  # [osx]
-    - gxx_linux-64=8.*    # [linux]
+    - gxx_linux-64         # [linux]
+    - clangxx_osx-64 >=8*  # [osx]
     
   host:
     - python
@@ -31,7 +31,7 @@ requirements:
     - expat
     - scipy >=1.0
     - cgal 4.14*
-    - sparsehash 2.0.*
+    - sparsehash 2.0*
     - cairomm
     - pycairo
     

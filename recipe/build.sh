@@ -30,6 +30,8 @@ elif [[ $(uname) == Darwin ]]; then
     export LDFLAGS="${LDFLAGS} -undefined dynamic_lookup"
 fi
 
+./autogen.sh
+
 ./configure \
     --prefix="${PREFIX}" \
     --with-boost="${BOOST_ROOT}" \

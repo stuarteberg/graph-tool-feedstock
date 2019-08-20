@@ -1,16 +1,12 @@
 {% set version = "2.29" %}
-{% set sha1 = "0bbe18b9c1d20e76f8d3e029713093e3ddc326f9" %}
 
 package:
   name: graph-tool
   version: {{ version }}
 
 source:
-  fn: graph-tool-{{ version }}.tar.bz2
-  url: https://downloads.skewed.de/graph-tool/graph-tool-{{ version }}.tar.bz2
-  sha1: {{ sha1 }}
-  patches:
-    - patches/no-obsoloete-compiler-version-flag.patch
+  git_url: https://git.skewed.de/count0/graph-tool
+  git_tag: release-{{ version }}
 
 build:
   skip: true  # [win]
@@ -19,7 +15,11 @@ build:
 
 requirements:
   build:
+    - libtool
+    - autoconf
+    - automake
     - pkg-config
+
     #- {{ compiler("cxx") }}
     - clangxx_osx-64=8.*  # [osx]
     - gxx_linux-64=8.*    # [linux]

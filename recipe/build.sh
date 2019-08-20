@@ -42,9 +42,12 @@ fi
 ##
 
 # Due to the high RAM requirements to build this package,
-# we don't build in parallel.
-make 
+# We limit build parallelism to no more than 3.
+if [ "${CPU_COUNT}" -gt 3 ]; then
+	CPU_COUNT=3
+fi
 
+make -j${CPU_COUNT}
 #LD_LIBRARY_PATH=${PREFIX}/lib make test
 
 make install

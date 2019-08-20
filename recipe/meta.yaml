@@ -9,8 +9,8 @@ source:
   git_tag: release-{{ version }}
 
 build:
-  skip: true  # [win]
-  number: 1
+  skip: true  # [win or py != 37]
+  number: 0
   detect_binary_files_with_prefix: true
 
 requirements:

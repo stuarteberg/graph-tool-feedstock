@@ -8,6 +8,10 @@ source:
   git_url: https://git.skewed.de/count0/graph-tool
   git_tag: release-{{ version }}
 
+  patches:
+    - patches/no-check-python-link.patch
+    - patches/skip-boost-python-config.patch
+
 build:
   skip: true  # [win or py != 37]
   number: 0

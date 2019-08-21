@@ -53,7 +53,12 @@ MAX_CORES=3
 if [ "${CPU_COUNT}" -gt ${MAX_CORES} ]; then
 	CPU_COUNT=${MAX_CORES}
 fi
-make -j${CPU_COUNT}
+
+make -j${CPU_COUNT} || true
+make -j${CPU_COUNT} || true
+make -j${CPU_COUNT} || true
+make -j${CPU_COUNT} || true
+make
 
 # Test
 #LD_LIBRARY_PATH=${PREFIX}/lib make test

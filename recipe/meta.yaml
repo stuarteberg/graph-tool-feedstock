@@ -11,7 +11,11 @@ source:
   sha1: {{ sha1 }}
 
   patches:
+    # Don't let configure test the python configuration via a test module;
+    # it fails to link because we don't include -lpython in LDFLAGS.
     - patches/no-check-python-link.patch
+
+    # Don't use autotools to detect and test boost-python.
     - patches/skip-boost-python-config.patch
     
     # These implement a workaround for a bug in clang,

@@ -17,13 +17,17 @@ export BOOST_ROOT="${PREFIX}"
 #
 # We don't want to set PYTHON_LIBS, but we can't leave it empty.
 # This is a suitable no-op.  See note above.
-PYTHON_LIBS="-L${PREFIX}/lib"
+PYTHON_LIBS=" "
+
+# Explicitly set this, which is used in configure.
+# (We patched away the auto-detection of this variable.)
+export BOOST_PYTHON_LIB=boost_python37
 
 if [[ $(uname) == Linux ]]; then
-    export BOOST_PYTHON="${BOOST_ROOT}/lib/libboost_python3.so"
+    export BOOST_PYTHON="${BOOST_ROOT}/lib/lib${BOOST_PYTHON_LIB}.so"
 
 elif [[ $(uname) == Darwin ]]; then
-    export BOOST_PYTHON="${BOOST_ROOT}/lib/libboost_python3.dylib"
+    export BOOST_PYTHON="${BOOST_ROOT}/lib/lib${BOOST_PYTHON_LIB}.dylib"
 
     # Don't resolve python symbols until runtime.
     # See note above about PYTHON_LIBS.
@@ -38,16 +42,20 @@ fi
     --with-boost-libdir="${BOOST_ROOT}/lib" \
     --with-boost-python="${BOOST_PYTHON}" \
     --with-expat="${PREFIX}" \
+    --disable-debug \
+    --disable-dependency-tracking \
     PYTHON_LIBS="${PYTHON_LIBS}" \
 ##
 
 # Due to the high RAM requirements to build this package,
 # We limit build parallelism to no more than 3.
-if [ "${CPU_COUNT}" -gt 3 ]; then
-	CPU_COUNT=3
+MAX_CORES=3
+if [ "${CPU_COUNT}" -gt ${MAX_CORES} ]; then
+	CPU_COUNT=${MAX_CORES}
 fi
-
 make -j${CPU_COUNT}
+
+# Test
 #LD_LIBRARY_PATH=${PREFIX}/lib make test
 
 make install

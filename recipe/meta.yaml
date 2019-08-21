@@ -5,12 +5,23 @@ package:
   version: {{ version }}
 
 source:
+  # We pull from git (rather than tarball)
+  # so we can run autotools ourselves.
+  # This avoids a configure problem on mac, and makes the
+  # configure script slightly more straightforward to patch.
   git_url: https://git.skewed.de/count0/graph-tool
   git_tag: release-{{ version }}
 
   patches:
     - patches/no-check-python-link.patch
     - patches/skip-boost-python-config.patch
+    
+    # These implement a workaround for a bug in clang,
+    # which will probably be added to master in version 2.30
+    # See the following merge request:
+    # https://git.skewed.de/count0/graph-tool/merge_requests/19
+    - patches/no-max-element-graph-adjacency.patch  # [osx]
+    - patches/no-max-element-graph-blockmodel.patch # [osx]
 
 build:
   skip: true  # [win or py != 37]
@@ -24,9 +35,10 @@ requirements:
     - automake
     - pkg-config
 
-    #- {{ compiler("cxx") }}
-    - gxx_linux-64         # [linux]
+    # On mac, requires clang 8
+    # (clang 4 does not have sufficient c++17 support)
     - clangxx_osx-64 >=8*  # [osx]
+    - {{ compiler("cxx") }} # [linux]
     
   host:
     - python

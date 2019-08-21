@@ -1,16 +1,14 @@
 {% set version = "2.29" %}
+{% set sha1 = "0bbe18b9c1d20e76f8d3e029713093e3ddc326f9" %}
 
 package:
   name: graph-tool
   version: {{ version }}
 
 source:
-  # We pull from git (rather than tarball)
-  # so we can run autotools ourselves.
-  # This avoids a configure problem on mac, and makes the
-  # configure script slightly more straightforward to patch.
-  git_url: https://git.skewed.de/count0/graph-tool
-  git_tag: release-{{ version }}
+  fn: graph-tool-{{ version }}.tar.bz2
+  url: https://downloads.skewed.de/graph-tool/graph-tool-{{ version }}.tar.bz2
+  sha1: {{ sha1 }}
 
   patches:
     - patches/no-check-python-link.patch
